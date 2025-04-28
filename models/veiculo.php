@@ -28,6 +28,7 @@ abstract class Veiculo {
         return $this ->placa;
     }
     public function setDisponivel(bool $disponivel):void{
+        $this ->disponivel = $disponivel;
     }
 }
 
