@@ -17,6 +17,18 @@ abstract class Veiculo {
     }
     //Função para cálculo de aluguel
     abstract public function calcularAluguel(int $dias) : float;
+
+    public function IsDisponivel():bool {
+        return $this ->disponivel;
+    }
+    public function gtModelo():string {
+        return $this ->modelo;
+    }
+    public function getPlaca():string {
+        return $this ->placa;
+    }
+    public function setDisponivel(bool $disponivel):void{
+    }
 }
 
 
