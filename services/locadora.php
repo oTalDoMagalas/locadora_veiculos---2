@@ -52,14 +52,14 @@ class Locadora
 
         file_put_contents(ARQUIVO_JSON, json_encode($dados, JSON_PRETTY_PRINT));
     }
-    // Método para adicionar um veículo
+//////////////////// Método para adicionar um veículo ////////////////////
     public function adicionarVeiculo(Veiculo $veiculo): void
     {
         $this->veiculos[] = $veiculo;
         $this->salvarVeiculos();
     }
 
-    //Remover veículo
+//////////////////// Remover veículo ////////////////////
     public function deletarVeiculo(string $modelo, string $placa): string
     {
         foreach ($this->veiculos as $key => $veiculo) {
@@ -73,7 +73,7 @@ class Locadora
         return "Veículo não encontrado.";
     }
 
-    // Alugar veículo por dias
+//////////////////// Alugar veículo por dias ////////////////////
     public function alugarVeiculo(string $modelo, int $dias = 1): string
     {
         foreach ($this->veiculos as $veiculo) {
@@ -87,24 +87,31 @@ class Locadora
         return "Veículo não disponível.";
     }
 
-    //Devolver veículo
-    public function devolverVeiculo(string $placa): string
+//////////////////// Devolver veículo ////////////////////
+    public function devolverVeiculo(string $modelo): string
     {
         foreach ($this->veiculos as $veiculo) {
-            if ($veiculo->getPlaca() === $placa) {
-                return $veiculo->devolver();
+            if ($veiculo->getModelo() === $modelo) {
+                if (!$veiculo->isDisponivel()) {
+                    $mensagem = $veiculo->devolver();
+                    $this->salvarVeiculos();
+                    return $mensagem;
+                } else {
+                    return "O veículo já está disponível.";
+                }
             }
         }
         return "Veículo não encontrado.";
     }
+    
 
-    // Retornar a lista de veículos
+    //////////////////// Retornar a lista de veículos ////////////////////
     public function listarVeiculos(): array
     {
         return $this->veiculos;
     }
 
-    // Calcular previsão do valor
+    //////////////////// Calcular previsão do valor ////////////////////
     public function calcularValorAluguel(string $placa, int $dias): float
     {
         foreach ($this->veiculos as $veiculo) {
