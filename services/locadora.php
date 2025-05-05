@@ -74,19 +74,18 @@ class Locadora
     }
 
     // Alugar veículo por dias
-    public function alugarVeiculo(string $placa, int $dias): string
+    public function alugarVeiculo(string $modelo, int $dias = 1): string
     {
         foreach ($this->veiculos as $veiculo) {
-            if ($veiculo->getPlaca() === $placa) {
-                return $veiculo->alugar($dias);
+            if ($veiculo->getModelo() === $modelo && $veiculo->isDisponivel()) {
+               $valorAluguel = $veiculo->calcularAluguel($dias);
+               $mensagem = $veiculo->alugar($dias);
+               $this->salvarVeiculos();
+               return$mensagem . 'Valor total do alugeuel: R$' . number_format($valorAluguel, 2, ',', '.');
             }
         }
-        return "Veículo não encontrado.";
+        return "Veículo não disponível.";
     }
-
-
-
-
 
     //Devolver veículo
     public function devolverVeiculo(string $placa): string
