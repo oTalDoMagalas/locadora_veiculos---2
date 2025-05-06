@@ -1,45 +1,43 @@
-<?php
+<?php 
 
-// Incluir o autoload do composer para carregar automaticamente as classes utilizadas
-require_once '../vendor/autoload.php';
+    // incuir o auto load do composer para carregar automaticamente as classes utilizadas
+    require_once __DIR__ . '/../vendor/autoload.php';
 
-// Incluir o arquivo com as variáveis
-require_once __DIR__ . '/../config/config.php';
+    // incluir o arquivo com as variaveis
+    require_once __DIR__ . '/../config/config.php';
 
-session_start();
+    session_start();
 
-// Inserir a classe de autenticação
-use Services\Auth;
+    // inserir a classe de autenticação
+    use Services\Auth;
 
-// Inicializa a variável para mensagens de erro
-$mensagem = '';
+    // Inicializa a variável para mensagens de erro
+    $mensagem = '';
 
-// Instanciar a classe de autenticação
-$auth = new Auth();
+    // instanciar a classe de autenticação
+    $auth = new Auth();
 
-// Verificar se já foi autenticado
-if (Auth::verificarLogin()) {
-    // Redirecionar para a página principal
-    header('Location: index.php');
-    exit;
-}
-
-// Verificar se o formulário foi enviado
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Obter os dados do formulário
-    $usuario = $_POST['username'] ?? '';
-    $password = $_POST['password'] ?? '';
-
-    // Verificar se o usuário e senha estão corretos
-    if ($auth->login($usuario, $password)) {
-        // Se o login for correto direciona para a página inicial
+    // verifica se já foi autenticado
+    if (Auth::verificarLogin()) {
+        echo "Usuário já autenticado. Redirecionando...";
         header('Location: index.php');
         exit;
-    } else {
-        // Mensagem de erro
-        $mensagem = 'Falha ao executar o login! Verifique se o usuário e senha estão corretos.';
     }
-}
+
+    // verifica se o formulário foi enviado
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        echo "Formulário enviado. Verificando login...";
+        $username = $_POST['username'] ?? '';
+        $password = $_POST['password'] ?? '';
+    
+        if ($auth->login($username, $password)) {
+            echo "Login bem-sucedido. Redirecionando...";
+            header('Location: index.php');
+            exit;
+        } else {
+            $mensagem = 'Usuário ou senha incorretos!';
+        }
+    }
 
 ?>
 
@@ -48,15 +46,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Locadora de veículos</title>
-    <!-- Link do bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css&quot; rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <!-- Link dos ícones -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"&gt;
-    <!-- CSS Interno -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <title>Login</title>
     <style>
         .login-container{
-            max-width:400px;
+            max-width: 400px;
             margin: 100px auto;
         }
         .password-toggle{
@@ -71,46 +66,41 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body class="bg-light">
     <div class="login-container">
         <div class="card">
-            <!-- Título do card -->
             <div class="card-header">
-                <h4 class="mb-1">Login</h4>
+                <h4 class="mb-0">Login</h4>
             </div>
 
-            <!-- Corpo do card -->
             <div class="card-body">
 
-                <?php if ($mensagem): ?>
+                <?php if($mensagem): ?>
                     <div class="alert alert-danger"><?= htmlspecialchars($mensagem) ?></div>
                 <?php endif; ?>
 
-                <form method="post" action="" class="needs-validation" novalidate>
-                    <input type="hidden">
-
+                <form action="" method="post" class="needs-validation" novalidate>
                     <div class="mb-3">
-                        <label for="user" class="form-label">
-                            Usuário:
-                        </label>
-                        <input type="text" name="username" class="form-control" required autocomplete="off" placeholder="Digite o usuário">
+                        <label for="" class="form-label">Usuario:</label>
+                        <input type="text" placeholder="Digite seu usuario" name="username" class="form-control" require autocomplete="off">
                     </div>
-
                     <div class="mb-3 position-relative">
-                        <label for="password" class="form-label">
-                            Senha:
-                        </label>
-                        <input type="password" name="password" id="password" class="form-control" required>
-                        <span class="password-toggle mt-3" onclick="togglePassword()"><i class="bi bi-eye"></i></span>
+                        <label for="password" class="form-label">Senha:</label>
+                        <input type="password" placeholder="Digite sua senha" name="password" class="form-control" id="password" require>
+                        <span class="password-toggle mt-3" onclick="togglePassword()"><i class="bi bi-eye-slash-fill" id="olho"></i></span>
                     </div>
-
-                    <button type="submit" class="btn btn-warning w-100">Entrar</button>
+                    <button type="submit" class="btn btn-success w-100">Entrar</button>
                 </form>
             </div>
         </div>
     </div>
-   
+
     <script>
         function togglePassword() {
             let passwordInput = document.getElementById('password');
+            let olho = document.getElementById('olho');
             passwordInput.type = (passwordInput.type === 'password') ? 'text' : 'password';
+            
+            // Alterna entre as classes do ícone do olho
+            olho.classList.toggle('bi-eye-slash-fill');
+            olho.classList.toggle('bi-eye');
         }
     </script>
 </body>

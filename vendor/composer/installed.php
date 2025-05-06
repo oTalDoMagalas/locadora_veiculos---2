@@ -3,7 +3,7 @@
         'name' => 'locadora/veiculos',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '6585771ca7ad3cfb3f9e0bf21643fa275d34f8e3',
+        'reference' => '269d12efe2b32bd84b41f91ad8871fd7e204865a',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         'locadora/veiculos' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '6585771ca7ad3cfb3f9e0bf21643fa275d34f8e3',
+            'reference' => '269d12efe2b32bd84b41f91ad8871fd7e204865a',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

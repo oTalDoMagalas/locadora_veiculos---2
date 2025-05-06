@@ -1,15 +1,15 @@
 {
-    "name": "locadora/veiculos",
-    "description": "Sistema de locadora de Veículos",
-    "type": "project" ,
-    "autoload": {
+    "name" : "locadora/veiculos",
+    "description" : "Sistema de Locadora de Veículos",
+    "type" : "project",
+    "autoload" : {
         "psr-4": {
-            "interfaces\\": "interfaces/",
-            "models\\": "models/",
-            "Services\\": "services/"
+            "Interfaces\\" : "interfaces/",
+            "Models\\" : "models/",
+            "Services\\" : "services/"
         }
     },
-    "require": {
-            "php": ">=7.4"
+    "require" : {
+        "php" : ">=7.4"
     }
 }

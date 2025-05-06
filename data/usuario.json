@@ -1,12 +1,12 @@
 [
     {
         "usuario": "admin",
-        "password": "$2y$12$wGWcLMlR1oCd88aDSysEtuqDbvS4PHNTregYawNfJNsL25fGjxejO",
+        "password": "$2y$12$6Z8rAEIkoeqOxB5zFBKyduZ.Z9AiqzMHby1BvML72\/TObRYDZyfSW",
         "perfil": "admin"
     },
     {
         "usuario": "usuario",
-        "password": "$2y$12$1OTph9LRAlQdToF\/V26FgOdsZzQFZjXJBE\/sPC5MCwxlrSfieY6RG",
+        "password": "$2y$12$RYTl9MvnSOHRaSHNKH7Ra.ImJBcwAjUSgqWW\/5866QAwD21QXJmIC",
         "perfil": "usuario"
     }
 ]
