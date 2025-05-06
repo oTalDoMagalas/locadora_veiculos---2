@@ -67,9 +67,9 @@ class Auth
     {
         session_destroy();
     }
-    public function verificarLogin(string $perfil): bool
+    public static function verificarLogin(): bool
     {
-        return isset($_SESSION['auth']) && $_SESSION['auth']['perfil'] === $perfil;
+        return isset($_SESSION['auth']) && $_SESSION['auth']['perfil'] === true;
     }
 
     public function isPerfil(string $perfil): bool
